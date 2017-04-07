@@ -2,7 +2,7 @@ import java.util.*;
 
 //import java.util.Enumeration;
 
- class FitCache{
+ public class FitCache{
 	
 	 /* *** Singleton class implementation *** */
 	 
@@ -13,12 +13,18 @@ import java.util.*;
 		myCache=new HashMap<String, Double>();
 	}
 	
+	private static class SingletonHelper{
+		private static final FitCache fitnessCache = new FitCache();
+	}
+	
+	//return SingletonHelper._captain;
 	public static FitCache getInstance() {
 		if(fitnessCache==null)
 		{
-			fitnessCache = new FitCache();
+			fitnessCache =  SingletonHelper.fitnessCache;
 		}
-      return fitnessCache;
+			return fitnessCache;
+		
    }
   
 	//public static HashMap<String, Double> fitnessCache =  new HashMap<String, Double>();
