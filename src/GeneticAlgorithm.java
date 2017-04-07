@@ -22,19 +22,20 @@ public class GeneticAlgorithm {
 	
 	public double calcFitness(Individual individual) {
 		double fitness=0;
+		FitCache cache = FitCache.getInstance( );
 		// Track number of correct genes
 		int correctGenes = 0;
 		
 		//Check in cache
 		boolean empty,exists;
-		empty = FitCache.ifEmpty(); 
-		exists=FitCache.ifExist(individual.toString());
+		empty = cache.ifEmpty(); 
+		exists=cache.ifExist(individual.toString());
 		
 		if(!empty)
 		{
 			if(exists)
 			{
-				 fitness=FitCache.getFitness(individual.toString());
+				 fitness=cache.getFitness(individual.toString());
 				 this.evaluationsSaved++;	
 			}
 			else
@@ -49,7 +50,7 @@ public class GeneticAlgorithm {
 				
 				 fitness = (double)correctGenes / individual.getChromosomeLength();
 				individual.setFitness(fitness);
-				FitCache.setFitness(individual.toString(),fitness);
+				cache.setFitness(individual.toString(),fitness);
 				
 			}
 			
@@ -69,7 +70,7 @@ public class GeneticAlgorithm {
 			 fitness = (double)correctGenes / individual.getChromosomeLength();
 			// Store fitness
 			individual.setFitness(fitness);
-			FitCache.setFitness(individual.toString(),fitness);
+			cache.setFitness(individual.toString(),fitness);
 			//System.out.println("Size of hash table: "+FitCache.hashSize());
 			//FitCache.printHash();
 			//System.exit(0);
